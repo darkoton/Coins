@@ -1,0 +1,73 @@
+/* COIN */
+
+.coin {
+  @apply flex flex-col overflow-hidden relative justify-between items-center rounded-3xl;
+  background-color: #242529;
+  box-shadow: $colorBg 0 0 10px 1px;
+
+  &::after {
+    content: 'Click if you want to see the graph';
+    @apply absolute top-40 left-1/2 -translate-x-1/2 text-center;
+  }
+
+  &__top {
+    @apply flex justify-between w-full;
+    padding: 15px;
+  }
+
+  &__left {
+    @apply flex items-center;
+    column-gap: 10px;
+  }
+
+  &__img {
+    @apply w-full h-full;
+    max-width: 40px;
+    max-height: 40px;
+  }
+
+  &__img img {
+    @apply w-full h-full object-cover;
+  }
+
+  &__title {
+    @apply flex flex-col text-sm;
+
+    &-full {
+      @apply font-semibold;
+    }
+    &-short {
+      color: $colorGray;
+    }
+  }
+
+  &__right {
+    @apply flex flex-col;
+  }
+
+  &__price {
+    @apply font-semibold text-sm;
+  }
+  &__price-change {
+    @apply text-base;
+    color: $colorGray;
+  }
+  &__icon.icon-double-arrow-up {
+    color: $colorGreen;
+  }
+  &__icon.icon-double-arrow-down {
+    color: $colorRed;
+  }
+
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  &:active {
+    box-shadow: rgba(#fff, 0.2) 0 0 0px 5px;
+  }
+  & #chart {
+    @apply relative z-10;
+  }
+  & #chart svg {
+    background: #242529 !important;
+  }
+}

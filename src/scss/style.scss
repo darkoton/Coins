@@ -1,0 +1,88 @@
+//< " FILE WITH RESET STYLES " >=============================================================================================================>//
+@import './modules/_nullstyle';
+
+//< " CONNECTING THE FILE WITH FONTS " >=====================================================================================================>//
+// @import "./modules/_fonts";
+
+//< " CONNECTING THE FILE WITH ICONS " >=====================================================================================================>//
+@import './modules/_iconfonts';
+
+//< " MIXINS " >=============================================================================================================>//
+@import './modules/_mixins';
+
+//< " FILE WITH VARIABLES " >=============================================================================================================>//
+@import './modules/_vars';
+
+@import './modules/_tailwind';
+
+//< " body SITE " >=============================================================================================================>//
+body {
+  background-color: $colorBg;
+  font-family: $fontFamily;
+  color: $colorWhite;
+  font-size: 14px;
+  overflow: hidden;
+  // ._lock-scroll
+  &._lock-scroll {
+    overflow: hidden;
+  }
+}
+
+//< " Wrapper " >=============================================================================================================>//
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+//< " GRID " >=============================================================================================================>//
+
+// .content
+.content {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+// ._container
+._container {
+  padding: 0px #{calc($containerPadding / 2) + px};
+  margin: 0px auto;
+  max-width: $maxWidthContainer + px;
+}
+
+//< " FILES COMPONENTS " >=============================================================================================================>//
+@import './components/_header';
+@import './components/_footer';
+@import './components/_header';
+@import './components/_home';
+@import './components/_rate';
+
+@import './components/_sidebar';
+@import './components/_coin';
+// @import "./components/_preloader";
+
+//< " MAIN BLOCK " >=============================================================================================================>//
+.page {
+  flex: 1 1 auto;
+}
+.app {
+  height: 100%;
+  padding: 20px 0;
+  display: flex;
+  column-gap: 20px;
+  max-height: 100vh;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  @media (max-width: 992px) {
+    padding: 0;
+    flex-direction: column;
+  }
+}
+.main {
+  flex: 1 1 auto;
+}

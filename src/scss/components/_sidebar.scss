@@ -1,0 +1,45 @@
+.sidebar {
+  @apply h-full max-w-20 rounded-2xl sticky top-0;
+
+  max-height: calc(100vh - 40px);
+  background-color: #0f0f12;
+
+  &__nav {
+    @apply h-full p-2 flex flex-col justify-center items-center gap-y-6;
+
+    li {
+      @apply w-full p-3 h-full flex items-center justify-center rounded-2xl;
+      max-width: 49px;
+      max-height: 49px;
+
+      &.sidebar__charts {
+        @include adaptiv-value(font-size, 22, 18, 1);
+      }
+      &.sidebar__convert {
+        @include adaptiv-value(font-size, 27, 22, 1);
+      }
+
+      transition: all 0.3s ease 0s;
+      @media (any-hover: hover) {
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+        &:hover {
+          transform: scale(0.9);
+          background-color: $colorBg;
+        }
+      }
+
+      &:active {
+        box-shadow: rgba(255, 255, 255, 0.1) 0 0 1px 3px;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    @apply h-auto w-full top-auto bottom-0 max-h-20 max-w-full rounded-b-none;
+
+    &__nav {
+      @apply flex-row justify-evenly;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+.home {
+  @apply h-full;
+  background: url('../img/abstract.svg') center/cover no-repeat;
+
+  &__wrapper,
+  &__body {
+    @apply h-full;
+  }
+
+  &__body {
+    @apply flex flex-col;
+  }
+
+  &__top {
+    @apply flex flex-col items-center;
+    @include adaptiv-indent(padding, 80, 50, 0, 0, 1);
+  }
+
+  &__list {
+    @apply flex flex-col w-full;
+    max-width: 600px;
+    & li {
+      @apply relative;
+
+      &:first-child {
+        z-index: 3;
+      }
+      &:nth-child(2) {
+        z-index: 2;
+        transform: translateX(4em) translateY(-10px);
+      }
+      &:nth-child(3) {
+        z-index: 1;
+        transform: translateX(8em) translateY(-20px);
+      }
+    }
+  }
+
+  &__bottom {
+    @apply flex-auto flex flex-col items-center justify-center;
+    background: rgba(24, 25, 30, 1);
+    background: -moz-linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(24, 25, 30, 0.9) 8%, rgba(24, 25, 30, 1) 45%);
+    background: -webkit-linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(24, 25, 30, 0.9) 8%, rgba(24, 25, 30, 1) 45%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(24, 25, 30, 0.9) 8%, rgba(24, 25, 30, 1) 45%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#18191e",GradientType=1);
+  }
+
+  &__welcome {
+    @apply flex flex-col;
+    @include adaptiv-value(row-gap, 20, 10, 1);
+  }
+
+  &__title {
+    @apply font-bold;
+    @include adaptiv-value(font-size, 30, 25, 1);
+  }
+  &__text {
+    @include adaptiv-value(font-size, 20, 16, 1);
+  }
+
+  &__button {
+    @apply self-end rounded-full flex items-center justify-center;
+    @include adaptiv-value(width, 100, 80, 1);
+    @include adaptiv-value(height, 100, 80, 1);
+    @include adaptiv-value(font-size, 34, 27, 1);
+    @include adaptiv-value(margin-top, 20, 10, 1);
+    transition: all 0.3s ease 0s;
+    background-color: #111115;
+
+    @media (any-hover: hover) {
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+
+      &:hover {
+        transform: translateX(0.2em);
+      }
+    }
+
+    &:active {
+      box-shadow:
+        rgba(255, 255, 255, 0.1) 0 0 0 10px,
+        rgba(255, 255, 255, 0.1) 0 0 0 20px;
+    }
+  }
+}

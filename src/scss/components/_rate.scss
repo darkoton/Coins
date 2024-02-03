@@ -1,0 +1,19 @@
+.rate {
+  @apply flex flex-col items-center py-3;
+
+  &__body {
+    @apply w-full;
+  }
+
+  &__title {
+    @apply text-center;
+    @include adaptiv-value(font-size, 30, 20, 1);
+    @include adaptiv-value(margin-bottom, 40, 20, 1);
+  }
+
+  &__list {
+    @apply w-full grid grid-flow-dense gap-3 mb-5;
+
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
