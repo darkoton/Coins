@@ -17,8 +17,13 @@ import './modules/dynamic_adap.js'; // DYNAMIC ADAPTIVE
 
 // import "./modules/parallax.js"  // PARALLAX EFFECT
 
-import './modules/rate.js';
+
+if (location.pathname == '/rate.html'){
+	import('./modules/rate.js')
+}
 
 //< " СКРИПТЫ " >=============================================================================================================>//
 isWebp();
 isDevice();
+
+

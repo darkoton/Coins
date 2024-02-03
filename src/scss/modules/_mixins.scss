@@ -198,5 +198,7 @@
   }
 
   // Standard version (Firefox only for now)
-  scrollbar-color: $foreground-color $background-color;
+  @-moz-document url-prefix() {
+    scrollbar-color: $foreground-color $background-color;
+  }
 }

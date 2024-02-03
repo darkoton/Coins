@@ -11,7 +11,7 @@
   }
 
   &__top {
-    @apply flex justify-between w-full;
+    @apply flex justify-between w-full h-full items-start;
     padding: 15px;
   }
 

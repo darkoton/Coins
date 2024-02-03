@@ -1,5 +1,5 @@
 .sidebar {
-  @apply h-full max-w-20 rounded-2xl sticky top-0;
+  @apply h-full max-w-20 rounded-2xl sticky top-0 z-20;
 
   max-height: calc(100vh - 40px);
   background-color: #0f0f12;

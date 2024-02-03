@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+  @@include("components/head.html", { "title": "Coins convertor" })
+
+  <body>
+    <!-- @@include("components/preloader.html") -->
+
+    <div class="wrapper">
+      <div class="content">
+        <main class="page">
+          <div class="app _container">
+            <div class="convertor">
+              <div class="convertor__body">
+                <h1 class="convertor__title">Convertor</h1>
+
+                <div class="convertor__item">
+                  <h2 class="convertor__subtitle">Send</h2>
+
+                  <div class="convertor__field">
+                    <input type="text" class="convertor__input" value="1">
+                  
+                    <div class="convertor__select" id="select"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script type="text/javascript">
+
+      class Select {
+        constructor(options){
+          this.element = document.querySelector(options.element)
+          this.values = options.values 
+          this.placeholde = options.placeholde
+          this.value = null
+          this.label = null
+
+          this.imgEl = null
+          this.textEl = null
+
+          if (!this.element) {
+            throw 'Element not defined'
+          }
+
+          this.element.classList.add('pa-select')
+
+          if (this.values && !Array.isArray(this.values)) {
+            throw 'Values must be typeof array'
+          }
+
+        }
+
+        select(callback = ()=>{}){
+          this.selectCallback = callback
+        }
+        scollLoad(callback = ()=>{}){
+          this.scrollLoadCallback = callback
+        }
+
+        onSelect(label, value){
+          this.value = value
+          this.label = value.name
+
+          this.imgEl.src = value.image
+          this.textEl.textContent = value.name
+
+this.selectCallback ? this.selectCallback(value) : null
+        }
+
+        render(){
+          const field = document.createElement('div')
+          field.classList.add('pa-select-field')
+
+ 
+
+          const valueImg = document.createElement('img')
+          valueImg.src = this.value ? this.value.img : this.values && this.values.length ? this.values[0].image : ''
+          this.imgEl = valueImg
+          valueImg.classList.add('pa-select-value-img')
+
+          const icon = document.createElement('i')
+          icon.classList.add('pa-select-icon-arrow')
+
+          const valueText = document.createElement('span')
+          valueText.textContent = this.label ? this.label : this.values && this.values.length ? this.values[0].name : this.placeholder ? this.placeholder : '' 
+          this.textEl = valueText
+          valueText.classList.add('pa-select-value-text')
+
+
+         const valueSpan = document.createElement('span')
+
+
+
+          const selectList = document.createElement('ul')
+          selectList.classList.add('pa-select-list')
+
+          selectList.addEventListener('scroll', (event)=>{
+
+            if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight - 100) {
+              this.scrollLoadCallback ? this.scrollLoadCallback(event) : null
+            }
+          })
+
+          if (this.values) {
+            this.values.forEach(value=>{
+
+              const item = document.createElement('li')
+              item.classList.add('pa-select-item')
+              item.selectValue = value.id
+              item.onclick = this.onSelect.bind(this, value.name, value)
+
+              const img = document.createElement('img')
+              img.classList.add('pa-select-item-img')
+              img.src = value.image
+
+              const text = document.createElement('span')
+              text.classList.add('pa-select-item-text')
+              text.textContent = value.name
+
+              item.append(img, text)
+              selectList.appendChild(item)
+
+            })
+          }
+
+          valueSpan.classList.add('pa-select-value')
+          valueSpan.onclick = ()=>{
+            icon.classList.toggle('active')
+            selectList.classList.toggle('active')
+          }
+          valueSpan.append(valueImg, valueText, icon)
+
+          field.append(valueSpan, selectList)
+          this.element.appendChild(field)
+        }
+
+        init(){
+          this.render()
+        }
+      }
+
+
+const select = new Select({
+  element: '#select',
+  values: [
+    {
+        "id": "bitcoin",
+        "symbol": "btc",
+        "name": "Bitcoin",
+        "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
+        "current_price": 43036,
+        "market_cap": 844515678233,
+        "market_cap_rank": 1,
+        "fully_diluted_valuation": 904038291164,
+        "total_volume": 9341602707,
+        "high_24h": 43361,
+        "low_24h": 42884,
+        "price_change_24h": 47.96,
+        "price_change_percentage_24h": 0.11156,
+        "market_cap_change_24h": 2841998892,
+        "market_cap_change_percentage_24h": 0.33766,
+        "circulating_supply": 19617343.0,
+        "total_supply": 21000000.0,
+        "max_supply": 21000000.0,
+        "ath": 69045,
+        "ath_change_percentage": -37.64996,
+        "ath_date": "2021-11-10T14:24:11.849Z",
+        "atl": 67.81,
+        "atl_change_percentage": 63386.32547,
+        "atl_date": "2013-07-06T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:54.445Z"
+    },
+    {
+        "id": "ethereum",
+        "symbol": "eth",
+        "name": "Ethereum",
+        "image": "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+        "current_price": 2297.0,
+        "market_cap": 276086644837,
+        "market_cap_rank": 2,
+        "fully_diluted_valuation": 276086644837,
+        "total_volume": 4839164738,
+        "high_24h": 2324.94,
+        "low_24h": 2293.92,
+        "price_change_24h": -0.6801327229272829,
+        "price_change_percentage_24h": -0.0296,
+        "market_cap_change_24h": 335295694,
+        "market_cap_change_percentage_24h": 0.12159,
+        "circulating_supply": 120181696.643116,
+        "total_supply": 120181696.643116,
+        "max_supply": null,
+        "ath": 4878.26,
+        "ath_change_percentage": -52.90953,
+        "ath_date": "2021-11-10T14:24:19.604Z",
+        "atl": 0.432979,
+        "atl_change_percentage": 530456.15741,
+        "atl_date": "2015-10-20T00:00:00.000Z",
+        "roi": {
+            "times": 70.35687751241653,
+            "currency": "btc",
+            "percentage": 7035.687751241653
+        },
+        "last_updated": "2024-02-03T19:05:38.749Z"
+    },
+    {
+        "id": "tether",
+        "symbol": "usdt",
+        "name": "Tether",
+        "image": "https://assets.coingecko.com/coins/images/325/large/Tether.png?1696501661",
+        "current_price": 0.999309,
+        "market_cap": 96187446905,
+        "market_cap_rank": 3,
+        "fully_diluted_valuation": 96187446905,
+        "total_volume": 16982704107,
+        "high_24h": 1.001,
+        "low_24h": 0.998225,
+        "price_change_24h": -0.000478796808980109,
+        "price_change_percentage_24h": -0.04789,
+        "market_cap_change_24h": -68091626.80104065,
+        "market_cap_change_percentage_24h": -0.07074,
+        "circulating_supply": 96231343353.0139,
+        "total_supply": 96231343353.0139,
+        "max_supply": null,
+        "ath": 1.32,
+        "ath_change_percentage": -24.45413,
+        "ath_date": "2018-07-24T00:00:00.000Z",
+        "atl": 0.572521,
+        "atl_change_percentage": 74.58641,
+        "atl_date": "2015-03-02T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:14.032Z"
+    },
+    {
+        "id": "binancecoin",
+        "symbol": "bnb",
+        "name": "BNB",
+        "image": "https://assets.coingecko.com/coins/images/825/large/bnb-icon2_2x.png?1696501970",
+        "current_price": 299.77,
+        "market_cap": 46138611906,
+        "market_cap_rank": 4,
+        "fully_diluted_valuation": 46138611906,
+        "total_volume": 322943797,
+        "high_24h": 303.38,
+        "low_24h": 299.75,
+        "price_change_24h": -1.0379862356574563,
+        "price_change_percentage_24h": -0.34507,
+        "market_cap_change_24h": -115503674.49074554,
+        "market_cap_change_percentage_24h": -0.24972,
+        "circulating_supply": 153856150.0,
+        "total_supply": 153856150.0,
+        "max_supply": 200000000.0,
+        "ath": 686.31,
+        "ath_change_percentage": -56.30503,
+        "ath_date": "2021-05-10T07:24:17.097Z",
+        "atl": 0.0398177,
+        "atl_change_percentage": 753036.20266,
+        "atl_date": "2017-10-19T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:35.301Z"
+    },
+    {
+        "id": "solana",
+        "symbol": "sol",
+        "name": "Solana",
+        "image": "https://assets.coingecko.com/coins/images/4128/large/solana.png?1696504756",
+        "current_price": 97.44,
+        "market_cap": 42488166143,
+        "market_cap_rank": 5,
+        "fully_diluted_valuation": 55409355262,
+        "total_volume": 1469132523,
+        "high_24h": 101.0,
+        "low_24h": 96.88,
+        "price_change_24h": -1.7568232941807054,
+        "price_change_percentage_24h": -1.77105,
+        "market_cap_change_24h": -758641279.2471313,
+        "market_cap_change_percentage_24h": -1.75421,
+        "circulating_supply": 436092959.755085,
+        "total_supply": 568714348.667368,
+        "max_supply": null,
+        "ath": 259.96,
+        "ath_change_percentage": -62.5198,
+        "ath_date": "2021-11-06T21:54:35.825Z",
+        "atl": 0.500801,
+        "atl_change_percentage": 19355.47662,
+        "atl_date": "2020-05-11T19:35:23.449Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:57.043Z"
+    },
+    {
+        "id": "ripple",
+        "symbol": "xrp",
+        "name": "XRP",
+        "image": "https://assets.coingecko.com/coins/images/44/large/xrp-symbol-white-128.png?1696501442",
+        "current_price": 0.517775,
+        "market_cap": 28171601914,
+        "market_cap_rank": 6,
+        "fully_diluted_valuation": 51745360629,
+        "total_volume": 827556655,
+        "high_24h": 0.52526,
+        "low_24h": 0.502209,
+        "price_change_24h": 0.01460401,
+        "price_change_percentage_24h": 2.90239,
+        "market_cap_change_24h": 784329780,
+        "market_cap_change_percentage_24h": 2.86385,
+        "circulating_supply": 54436190886.0,
+        "total_supply": 99987935982.0,
+        "max_supply": 100000000000.0,
+        "ath": 3.4,
+        "ath_change_percentage": -84.7711,
+        "ath_date": "2018-01-07T00:00:00.000Z",
+        "atl": 0.00268621,
+        "atl_change_percentage": 19166.81951,
+        "atl_date": "2014-05-22T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:46.479Z"
+    },
+    {
+        "id": "usd-coin",
+        "symbol": "usdc",
+        "name": "USDC",
+        "image": "https://assets.coingecko.com/coins/images/6319/large/usdc.png?1696506694",
+        "current_price": 0.999856,
+        "market_cap": 27068109670,
+        "market_cap_rank": 7,
+        "fully_diluted_valuation": 25473725571,
+        "total_volume": 2696665082,
+        "high_24h": 1.002,
+        "low_24h": 0.998327,
+        "price_change_24h": -0.001090290258814908,
+        "price_change_percentage_24h": -0.10893,
+        "market_cap_change_24h": 136947073,
+        "market_cap_change_percentage_24h": 0.50851,
+        "circulating_supply": 27064986095.8719,
+        "total_supply": 25470785983.8999,
+        "max_supply": null,
+        "ath": 1.17,
+        "ath_change_percentage": -14.71529,
+        "ath_date": "2019-05-08T00:40:28.300Z",
+        "atl": 0.877647,
+        "atl_change_percentage": 13.95692,
+        "atl_date": "2023-03-11T08:02:13.981Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:49.873Z"
+    },
+    {
+        "id": "staked-ether",
+        "symbol": "steth",
+        "name": "Lido Staked Ether",
+        "image": "https://assets.coingecko.com/coins/images/13442/large/steth_logo.png?1696513206",
+        "current_price": 2297.34,
+        "market_cap": 21773415209,
+        "market_cap_rank": 8,
+        "fully_diluted_valuation": 21773415209,
+        "total_volume": 9899250,
+        "high_24h": 2325.58,
+        "low_24h": 2295.31,
+        "price_change_24h": -2.1633866829597537,
+        "price_change_percentage_24h": -0.09408,
+        "market_cap_change_24h": 19506442,
+        "market_cap_change_percentage_24h": 0.08967,
+        "circulating_supply": 9477114.51871389,
+        "total_supply": 9477114.51871389,
+        "max_supply": null,
+        "ath": 4829.57,
+        "ath_change_percentage": -52.42902,
+        "ath_date": "2021-11-10T14:40:47.256Z",
+        "atl": 482.9,
+        "atl_change_percentage": 375.7697,
+        "atl_date": "2020-12-22T04:08:21.854Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:53.240Z"
+    },
+    {
+        "id": "cardano",
+        "symbol": "ada",
+        "name": "Cardano",
+        "image": "https://assets.coingecko.com/coins/images/975/large/cardano.png?1696502090",
+        "current_price": 0.514252,
+        "market_cap": 18053002602,
+        "market_cap_rank": 9,
+        "fully_diluted_valuation": 23144665226,
+        "total_volume": 280756759,
+        "high_24h": 0.524418,
+        "low_24h": 0.508301,
+        "price_change_24h": 0.00315077,
+        "price_change_percentage_24h": 0.61647,
+        "market_cap_change_24h": 159049294,
+        "market_cap_change_percentage_24h": 0.88884,
+        "circulating_supply": 35100318330.6778,
+        "total_supply": 45000000000.0,
+        "max_supply": 45000000000.0,
+        "ath": 3.09,
+        "ath_change_percentage": -83.33849,
+        "ath_date": "2021-09-02T06:00:10.474Z",
+        "atl": 0.01925275,
+        "atl_change_percentage": 2571.44161,
+        "atl_date": "2020-03-13T02:22:55.044Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:34.560Z"
+    },
+    {
+        "id": "avalanche-2",
+        "symbol": "avax",
+        "name": "Avalanche",
+        "image": "https://assets.coingecko.com/coins/images/12559/large/Avalanche_Circle_RedWhite_Trans.png?1696512369",
+        "current_price": 36.14,
+        "market_cap": 13274071943,
+        "market_cap_rank": 10,
+        "fully_diluted_valuation": 15733751944,
+        "total_volume": 554803702,
+        "high_24h": 37.47,
+        "low_24h": 35.44,
+        "price_change_24h": 0.00960382,
+        "price_change_percentage_24h": 0.02658,
+        "market_cap_change_24h": 57116980,
+        "market_cap_change_percentage_24h": 0.43215,
+        "circulating_supply": 367150665.912753,
+        "total_supply": 435183531.335894,
+        "max_supply": 720000000.0,
+        "ath": 144.96,
+        "ath_change_percentage": -75.06241,
+        "ath_date": "2021-11-21T14:18:56.538Z",
+        "atl": 2.8,
+        "atl_change_percentage": 1190.57519,
+        "atl_date": "2020-12-31T13:15:21.540Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:48.087Z"
+    },
+    {
+        "id": "dogecoin",
+        "symbol": "doge",
+        "name": "Dogecoin",
+        "image": "https://assets.coingecko.com/coins/images/5/large/dogecoin.png?1696501409",
+        "current_price": 0.079131,
+        "market_cap": 11311741306,
+        "market_cap_rank": 11,
+        "fully_diluted_valuation": 11311723103,
+        "total_volume": 167022721,
+        "high_24h": 0.079452,
+        "low_24h": 0.078591,
+        "price_change_24h": 0.000198,
+        "price_change_percentage_24h": 0.25085,
+        "market_cap_change_24h": 28335970,
+        "market_cap_change_percentage_24h": 0.25113,
+        "circulating_supply": 142923636383.705,
+        "total_supply": 142923406383.705,
+        "max_supply": null,
+        "ath": 0.731578,
+        "ath_change_percentage": -89.19148,
+        "ath_date": "2021-05-08T05:08:23.458Z",
+        "atl": 8.69e-05,
+        "atl_change_percentage": 90888.91296,
+        "atl_date": "2015-05-06T00:00:00.000Z",
+        "roi": null,
+        "last_updated": "2024-02-03T19:05:46.024Z"
+    }]
+})
+
+select.init()
+
+select.select((value)=>{
+  console.log(value)
+})
+
+
+select.scollLoad((event)=>{
+})
+
+    </script>
+  </body>
+</html>
