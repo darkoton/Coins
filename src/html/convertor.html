@@ -11,7 +11,7 @@
           <div class="app _container">
             <div class="convertor">
               <div class="convertor__body">
-                <h1 class="convertor__title">Convertor</h1>
+                <h1 class="convertor__title">Convert</h1>
 
                 <div class="convertor__item">
                   <h2 class="convertor__subtitle">Send</h2>
@@ -29,7 +29,10 @@
       </div>
     </div>
     <script src="js/script.js"></script>
+    <script src="https://unpkg.com/fast-average-color/dist/index.browser.min.js"></script>
     <script type="text/javascript">
+
+      const fac = new FastAverageColor();
 
       class Select {
         constructor(options){
@@ -84,6 +87,7 @@ this.selectCallback ? this.selectCallback(value) : null
 
           const icon = document.createElement('i')
           icon.classList.add('pa-select-icon-arrow')
+          icon.classList.add('icon-arrow-down')
 
           const valueText = document.createElement('span')
           valueText.textContent = this.label ? this.label : this.values && this.values.length ? this.values[0].name : this.placeholder ? this.placeholder : '' 
@@ -464,7 +468,16 @@ const select = new Select({
 select.init()
 
 select.select((value)=>{
-  console.log(value)
+  console.log(select)
+  fac.getColorAsync(select.imgEl)
+    .then(color => {
+      console.log(color)
+      select.element.offsetParet.style.backgroundColor = color.rgba;
+      select.element.offsetParet.style.color = color.isDark ? '#fff' : '#000';
+    })
+    .catch(e => {
+      console.log(e);
+    });
 })
 
 
