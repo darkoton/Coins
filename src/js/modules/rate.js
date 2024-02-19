@@ -20,6 +20,7 @@ async function getCoins() {
 
 
 
+
   const coins = await Promise.all(
     result.map(async coin => {
       return await new Promise(resolve => {

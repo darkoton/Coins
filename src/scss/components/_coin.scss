@@ -6,12 +6,12 @@
   box-shadow: $colorBg 0 0 10px 1px;
 
   &::after {
-    content: 'Click if you want to see the graph';
+    content: "Click if you want to see the graph";
     @apply absolute top-40 left-1/2 -translate-x-1/2 text-center;
   }
 
   &__top {
-    @apply flex justify-between w-full h-full items-start;
+    @apply flex justify-between w-full h-full items-start z-10;
     padding: 15px;
   }
 
